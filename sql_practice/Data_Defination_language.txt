@@ -1,0 +1,116 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| blockchainml       |
+| feedbackdb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| profound           |
+| profound_labmanual |
+| studnetdb          |
+| sys                |
++--------------------+
+9 rows in set (0.05 sec)
+
+mysql> use profound;
+Database changed
+mysql> CREATE TABLE Students( student_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     age INT,
+    ->     course VARCHAR(50));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc Students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| course     | varchar(50)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> ALTER TABLE Students ADD email varchar(50);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| course     | varchar(50)  | YES  |     | NULL    |       |
+| email      | varchar(50)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Students ADD primary key(email);
+ERROR 1068 (42000): Multiple primary key defined
+mysql> ALTER TABLE Students DROP PRIMARY KEY;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Students ADD primary key(student_id);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| course     | varchar(50)  | YES  |     | NULL    |       |
+| email      | varchar(50)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO students (student_id, name, age, course)
+    -> VALUES
+    -> (1, 'Aditya', 21, 'Computer Engineering'),
+    -> (2, 'Samiksha', 22, 'Information Technology'),
+    -> (3, 'Rahul', 20, 'Mechanical Engineering');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| course     | varchar(50)  | YES  |     | NULL    |       |
+| email      | varchar(50)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students;
++------------+----------+------+------------------------+-------+
+| student_id | name     | age  | course                 | email |
++------------+----------+------+------------------------+-------+
+|          1 | Aditya   |   21 | Computer Engineering   | NULL  |
+|          2 | Samiksha |   22 | Information Technology | NULL  |
+|          3 | Rahul    |   20 | Mechanical Engineering | NULL  |
++------------+----------+------+------------------------+-------+
+3 rows in set (0.01 sec)
+
+mysql> truncate table students;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from students;
+Empty set (0.00 sec)
+
+mysql> drop table students;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql>
