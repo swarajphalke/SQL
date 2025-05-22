@@ -1,0 +1,18 @@
+2. Update view to add Salary column to View
+
+mysql> CREATE OR REPLACE VIEW EmployeeView AS
+    -> SELECT employee_id, CONCAT(first_name,' ',last_name) AS full_name, salary
+    -> FROM employees;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM EmployeeView;
++-------------+------------------+--------+
+| employee_id | full_name        | salary |
++-------------+------------------+--------+
+|           4 | Tom Jose         | 600000 |
+|           5 | Jerry Pinto      | 650000 |
+|           6 | Philip Mathew    | 750000 |
+|           7 | TestName1 123    | 650000 |
+|           8 | TestName2 Lname% | 600000 |
++-------------+------------------+--------+
+5 rows in set (0.00 sec)

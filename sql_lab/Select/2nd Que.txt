@@ -1,0 +1,17 @@
+					QUE 2. Get First_Name,Last_Name from employee table
+
+
+mysql> SELECT first_name, last_name FROM employees;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| John       | Abraham   |
+| Michael    | Clarke    |
+| Roy        | Thomas    |
+| Tom        | Jose      |
+| Jerry      | Pinto     |
+| Philip     | Mathew    |
+| TestName1  | 123       |
+| TestName2  | Lname%    |
++------------+-----------+
+8 rows in set (0.00 sec)

@@ -1,0 +1,152 @@
+
+mysql> CREATE TABLE learners (
+    ->          learner_id INT PRIMARY KEY,
+    ->          learner_name VARCHAR(50),
+    ->          course_id INT,
+    ->          enroll_date DATE
+    ->      );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO learners VALUES
+    ->      (1, 'Nikhil', 201, '2024-01-10'),
+    ->      (2, 'Isha', 202, '2024-02-15'),
+    ->      (3, 'Yash', 203, '2024-03-05'),
+    ->      (4, 'Tanvi', 201, '2024-04-01'),
+    ->      (5, 'Mohit', 204, '2024-05-20');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE modules (
+    ->          course_id INT PRIMARY KEY,
+    ->          module_name VARCHAR(50),
+    ->          duration_weeks INT,
+    ->          fee INT
+    ->      );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO modules VALUES
+    ->      (201, 'Full Stack Web Dev', 24, 12000),
+    ->      (202, 'AI & ML Basics', 36, 18000),
+    ->      (203, 'Intro to Python', 12, 5000),
+    ->      (204, 'UI/UX Design', 16, 8000),
+    ->      (205, 'Cyber Security', 32, 15000);
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from modules;
++-----------+--------------------+----------------+-------+
+| course_id | module_name        | duration_weeks | fee   |
++-----------+--------------------+----------------+-------+
+|       201 | Full Stack Web Dev |             24 | 12000 |
+|       202 | AI & ML Basics     |             36 | 18000 |
+|       203 | Intro to Python    |             12 |  5000 |
+|       204 | UI/UX Design       |             16 |  8000 |
+|       205 | Cyber Security     |             32 | 15000 |
++-----------+--------------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from learners;
++------------+--------------+-----------+-------------+
+| learner_id | learner_name | course_id | enroll_date |
++------------+--------------+-----------+-------------+
+|          1 | Nikhil       |       201 | 2024-01-10  |
+|          2 | Isha         |       202 | 2024-02-15  |
+|          3 | Yash         |       203 | 2024-03-05  |
+|          4 | Tanvi        |       201 | 2024-04-01  |
+|          5 | Mohit        |       204 | 2024-05-20  |
++------------+--------------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+                            -------------1.CREATE VIEW-------------
+
+mysql> create view learner_module_view as
+    -> select
+    -> l.learner_id,
+    -> l.learner_name,
+    -> m.module_name,
+    -> m.duration_weeks,
+    -> m.fee
+    -> from learners l
+    -> join modules m
+    -> on l.course_id = m.course_id;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from learner_module_view;
++------------+--------------+--------------------+----------------+-------+
+| learner_id | learner_name | module_name        | duration_weeks | fee   |
++------------+--------------+--------------------+----------------+-------+
+|          1 | Nikhil       | Full Stack Web Dev |             24 | 12000 |
+|          2 | Isha         | AI & ML Basics     |             36 | 18000 |
+|          3 | Yash         | Intro to Python    |             12 |  5000 |
+|          4 | Tanvi        | Full Stack Web Dev |             24 | 12000 |
+|          5 | Mohit        | UI/UX Design       |             16 |  8000 |
++------------+--------------+--------------------+----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create view min_fee_view as
+    -> select fee
+    -> from modules
+    -> where fee < 9000;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from min_fee_view;
++------+
+| fee  |
++------+
+| 5000 |
+| 8000 |
++------+
+2 rows in set (0.00 sec)
+
+mysql> create view abc_view as
+    -> select l.learner_name, m.module_name
+    -> from learners as l
+    -> join modules as m
+    -> on l.course_id = m.course_id;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from abc_view;
++--------------+--------------------+
+| learner_name | module_name        |
++--------------+--------------------+
+| Nikhil       | Full Stack Web Dev |
+| Isha         | AI & ML Basics     |
+| Yash         | Intro to Python    |
+| Tanvi        | Full Stack Web Dev |
+| Mohit        | UI/UX Design       |
++--------------+--------------------+
+5 rows in set (0.00 sec)
+
+                            -------------2.UPDATE VIEW-------------
+
+mysql> create or replace view abc_view as
+    -> select l.learner_name, m.module_name, m.fee
+    -> from learners l
+    -> join modules m
+    -> on l.course_id = m.course_id;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from abc_view;
++--------------+--------------------+-------+
+| learner_name | module_name        | fee   |
++--------------+--------------------+-------+
+| Nikhil       | Full Stack Web Dev | 12000 |
+| Isha         | AI & ML Basics     | 18000 |
+| Yash         | Intro to Python    |  5000 |
+| Tanvi        | Full Stack Web Dev | 12000 |
+| Mohit        | UI/UX Design       |  8000 |
++--------------+--------------------+-------+
+5 rows in set (0.00 sec)
+
+                            -------------3.RENAME VIEW-------------
+
+Syntax -> RENAME TABLE old_view_name TO new_view_name;
+
+                            -------------4.DROP VIEW-------------
+
+mysql> DROP VIEW abc;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SELECT * FROM abc;
+ERROR 1146 (42S02): Table 'profound.abc' doesn't exist
+mysql>

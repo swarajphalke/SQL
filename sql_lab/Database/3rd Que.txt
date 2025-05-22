@@ -1,0 +1,22 @@
+	QUE 3. Write Sql Syntax to create EMPLOYEE_REF_ID in INCENTIVES table asforeign key with respect to EMPLOYEE_ID in employee table
+
+mysql> ALTER TABLE incentives
+    -> ADD CONSTRAINT employee_ref_id FOREIGN KEY (employee_ref_id)
+    -> REFERENCES employees(employee_id);
+Query OK, 5 rows affected (0.04 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc incentives;
++------------------+------+------+-----+---------+-------+
+| Field            | Type | Null | Key | Default | Extra |
++------------------+------+------+-----+---------+-------+
+| Employee_ref_id  | int  | NO   | PRI | NULL    |       |
+| incentive_date   | date | NO   | PRI | NULL    |       |
+| Incentive_amount | int  | YES  |     | NULL    |       |
++------------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+
+
+

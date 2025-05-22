@@ -1,0 +1,17 @@
+QUE 1. Select first_name, incentive amount from employee and incentives table for those
+employees who have incentives
+
+mysql> SELECT e.first_name, i.incentive_amount
+    -> FROM employees AS e
+    -> INNER JOIN incentives AS i
+    -> ON e.employee_id = i.employee_ref_id;
++------------+------------------+
+| first_name | incentive_amount |
++------------+------------------+
+| John       |             4500 |
+| John       |             5000 |
+| Michael    |             3500 |
+| Michael    |             3000 |
+| Roy        |             4000 |
++------------+------------------+
+5 rows in set (0.00 sec)

@@ -1,0 +1,7 @@
+QUE 6. Delete employee data from employee table who got incentives in incentive table
+
+mysql> DELETE e
+    -> FROM employees e
+    -> INNER JOIN incentives i
+    -> ON e.employee_id = i.employee_ref_id;
+Query OK, 3 rows affected (0.01 sec)

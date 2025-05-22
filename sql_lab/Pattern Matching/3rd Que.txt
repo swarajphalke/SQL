@@ -1,0 +1,16 @@
+QUE 3. Get employee details from employee table whose Salary greater than 600000
+
+mysql> SELECT *
+    -> FROM employees
+    -> WHERE salary > 600000;
++-------------+------------+-----------+---------+---------------------+------------+
+| employee_id | First_name | Last_name | Salary  | Joining_date        | Department |
++-------------+------------+-----------+---------+---------------------+------------+
+|           1 | John       | Abraham   | 1000000 | 2013-01-01 12:00:00 | Banking    |
+|           2 | Michael    | Clarke    |  800000 | 2013-01-01 12:00:00 | Insurance  |
+|           3 | Roy        | Thomas    |  700000 | 2013-02-01 12:00:00 | Banking    |
+|           5 | Jerry      | Pinto     |  650000 | 2013-02-01 12:00:00 | Insurance  |
+|           6 | Philip     | Mathew    |  750000 | 2013-01-01 12:00:00 | Services   |
+|           7 | TestName1  | 123       |  650000 | 2013-01-01 12:00:00 | Services   |
++-------------+------------+-----------+---------+---------------------+------------+
+6 rows in set (0.00 sec)

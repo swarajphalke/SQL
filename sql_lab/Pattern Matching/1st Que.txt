@@ -1,0 +1,13 @@
+QUE 1. Get employee details from employee table whose first name ends with 'n' and name
+contains 4 letters
+
+mysql> SELECT *
+    -> FROM employees
+    -> WHERE first_name LIKE '___n'
+    -> AND LENGTH(first_name)=4;
++-------------+------------+-----------+---------+---------------------+------------+
+| employee_id | First_name | Last_name | Salary  | Joining_date        | Department |
++-------------+------------+-----------+---------+---------------------+------------+
+|           1 | John       | Abraham   | 1000000 | 2013-01-01 12:00:00 | Banking    |
++-------------+------------+-----------+---------+---------------------+------------+
+1 row in set (0.00 sec)

@@ -1,0 +1,172 @@
+mysql> SELECT * FROM profile.contacts;
++----+----------------+----------------------------+------+-------------------------+
+| id | name           | email                      | age  | course                  |
++----+----------------+----------------------------+------+-------------------------+
+|  1 | Swaraj Phalke  | swaraj@example.com         |   24 | Computer Science        |
+|  2 | Anjali Sharma  | anjali@example.com         |   22 | Information Technology  |
+|  3 | Rohit Singh    | rohit@example.com          |   25 | Mechanical Engineering  |
+|  4 | Neha Deshmane  | neha.deshmane@example.com  |   23 | Electronics Engineering |
+|  5 | Rajesh Patil   | rajesh.patil@example.com   |   26 | Civil Engineering       |
+|  6 | Sneha Deshmukh | sneha.deshmukh@example.com |   21 | Computer Science        |
+|  7 | Kiran More     | kiran.more@example.com     |   24 | Electrical Engineering  |
+|  8 | Amit Joshi     | amit.joshi@example.com     |   22 | Information Technology  |
+|  9 | Pooja Nair     | pooja.nair@example.com     |   23 | Computer Science        |
+| 10 | Sandeep Reddy  | sandeep.reddy@example.com  |   25 | Mechanical Engineering  |
++----+----------------+----------------------------+------+-------------------------+
+10 rows in set (0.00 sec)
+
+							--------------- REGULAR EXPRESSIONS ---------------
+
+1.Matches names starting with s or S
+
+mysql> SELECT name FROM students WHERE name REGEXP '^s';
++--------+
+| name   |
++--------+
+| Swaraj |
+| Sneha  |
++--------+
+
+
+2.Matches names ending with a.
+
+mysql> SELECT name FROM students WHERE name REGEXP 'a$';
++--------+
+| name   |
++--------+
+| Aditya |
+| Sneha  |
+| Priya  |
+| Meera  |
++--------+
+
+
+3.Matches a followed by any character.
+
+mysql> SELECT name FROM students WHERE name REGEXP 'a.';
++--------+
+| name   |
++--------+
+| Aditya |
+| Swaraj |
+| Aarav  |
++--------+
+
+
+4.Matches names containing either w or r.
+
+mysql> SELECT name FROM students WHERE name REGEXP 'w|r';
++--------+
+| name   |
++--------+
+| Swaraj |
+| Rohit  |
+| Priya  |
+| Aarav  |
+| Meera  |
++--------+
+
+
+5.Matches any name that has at least one character.
+
+mysql> SELECT name FROM students WHERE name REGEXP '.';
++--------+
+| name   |
++--------+
+| Aditya |
+| Swaraj |
+| Rohit  |
+| Sneha  |
+| Priya  |
+| Aarav  |
+| Meera  |
++--------+
+
+
+6.Matches any name containing r or h.
+
+mysql> SELECT name FROM students WHERE name REGEXP '[r,h]';
++--------+
+| name   |
++--------+
+| Swaraj |
+| Rohit  |
+| Sneha  |
+| Priya  |
+| Aarav  |
+| Meera  |
++--------+
+
+
+7.Matches names containing double e, double r, or double s.
+
+mysql> SELECT name FROM students WHERE name REGEXP 'ee|rr|ss';
++-------+
+| name  |
++-------+
+| Meera |
++-------+
+
+
+8.Matches names not starting with r or h.
+
+mysql> SELECT name FROM students WHERE name REGEXP '^[^rh]';
++--------+
+| name   |
++--------+
+| Aditya |
+| Swaraj |
+| Sneha  |
+| Priya  |
+| Aarav  |
+| Meera  |
++--------+
+
+
+9.Matches a followed by zero or more s.
+
+mysql> SELECT name FROM students WHERE name REGEXP 'as*';
++--------+
+| name   |
++--------+
+| Aditya |
+| Swaraj |
+| Sneha  |
+| Priya  |
+| Aarav  |
+| Meera  |
++--------+
+
+
+10.Matches names with exactly two e characters in a row
+
+mysql> SELECT name FROM students WHERE name REGEXP 'e{2}';
++-------+
+| name  |
++-------+
+| Meera |
++-------+
+
+
+11. Matches names with one or more s
+
+mysql> SELECT name FROM students WHERE name REGEXP 's+';
++--------+
+| name   |
++--------+
+| Swaraj |
+| Sneha  |
++--------+
+
+
+12.{} needs to follow a character or group
+
+mysql> SELECT name FROM students WHERE name REGEXP 'e{2}';
++-------+
+| name  |
++-------+
+| Meera |
++-------+
+1 row in set (0.00 sec)
+
+  

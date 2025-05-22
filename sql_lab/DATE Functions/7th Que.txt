@@ -1,0 +1,7 @@
+QUE 7. Update incentive table where employee name is 'John'
+
+mysql> UPDATE incentives i
+     -> SET i.Incentive_amount = 9999
+    -> WHERE e.First_Name = 'John';
+Query OK, 2 rows affected (0.03 sec)
+Rows matched: 2  Changed: 2  Warnings: 0

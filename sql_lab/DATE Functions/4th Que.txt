@@ -1,0 +1,9 @@
+QUE 4. Get database date
+
+mysql> SELECT CURDATE();
++------------+
+| CURDATE()  |
++------------+
+| 2025-05-20 |
++------------+
+1 row in set (0.00 sec)

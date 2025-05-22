@@ -1,0 +1,20 @@
+QUE 1. Select First_Name,LAST_NAME from employee table as separate rows
+
+mysql> SELECT first_name AS name FROM employees
+    -> UNION
+    -> SELECT last_name AS name FROM employees;
++-----------+
+| name      |
++-----------+
+| Tom       |
+| Jerry     |
+| Philip    |
+| TestName1 |
+| TestName2 |
+| Jose      |
+| Pinto     |
+| Mathew    |
+| 123       |
+| Lname%    |
++-----------+
+10 rows in set (0.01 sec)

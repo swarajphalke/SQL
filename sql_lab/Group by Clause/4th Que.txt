@@ -1,0 +1,15 @@
+
+QUE 4. Get department wise average salary from employee table order by salary ascending
+
+mysql> SELECT department, AVG(salary) Average_Salary
+    -> FROM employees
+    -> GROUP BY department
+    -> ORDER BY Average_Salary ASC;
++------------+----------------+
+| department | Average_Salary |
++------------+----------------+
+| Insurance  |    662500.0000 |
+| Services   |    700000.0000 |
+| Banking    |    850000.0000 |
++------------+----------------+
+3 rows in set (0.01 sec)

@@ -1,0 +1,40 @@
+					QUE 4. Write SQL to drop foreign key on employee table
+
+ mysql> SHOW CREATE TABLE incentives;
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table      | Create Table                                                                                                                                                                                                                                                                                                                                                        |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| incentives | CREATE TABLE `incentives` (
+  `Employee_ref_id` int NOT NULL,
+  `incentive_date` date NOT NULL,
+  `Incentive_amount` int DEFAULT NULL,
+  PRIMARY KEY (`Employee_ref_id`,`incentive_date`),
+  CONSTRAINT `employee_ref_id` FOREIGN KEY (`Employee_ref_id`) REFERENCES `employees` (`employee_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE incentives
+    -> DROP FOREIGN KEY employee_ref_id;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+
+
+
+
+
+|-------------|---------------------------------------------------------------------------------------------|-
+|			  |																								|
+|	TABLE	  | CREATE TABLE																				|
+|-------------|---------------------------------------------------------------------------------------------|
+|  incentives | CREATE TABLE `incentives` (																	|
+|  `Employee_ref_id` int NOT NULL,																			|
+|  `incentive_date` date NOT NULL,																			|
+|  `Incentive_amount` int DEFAULT NULL,																		|
+|  PRIMARY KEY (`Employee_ref_id`,`incentive_date`),														|
+|  CONSTRAINT `employee_ref_id` FOREIGN KEY (`Employee_ref_id`) REFERENCES `employees` (`employee_id`) )	|
+|  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |										|
+|-----------------------------------------------------------------------------------------------------------|-

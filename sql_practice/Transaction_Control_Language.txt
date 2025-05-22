@@ -1,0 +1,117 @@
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| blockchainml       |
+| feedbackdb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| profound           |
+| profound_labmanual |
+| studnetdb          |
+| sys                |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> USE profound;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_profound |
++--------------------+
+| students           |
++--------------------+
+1 row in set (0.01 sec)
+
+mysql> CREATE TABLE college_students (
+    ->     student_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     age INT,
+    ->     department VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_profound |
++--------------------+
+| college_students   |
+| students           |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO college_students (student_id, name, age, department) VALUES
+    -> (1, 'Aditya', 21, 'Computer Engineering'),
+    -> (2, 'Samiksha', 22, 'Information Technology'),
+    -> (3, 'Rahul', 20, 'Mechanical Engineering');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM college_students;
++------------+----------+------+------------------------+
+| student_id | name     | age  | department             |
++------------+----------+------+------------------------+
+|          1 | Aditya   |   21 | Computer Engineering   |
+|          2 | Samiksha |   22 | Information Technology |
+|          3 | Rahul    |   20 | Mechanical Engineering |
++------------+----------+------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> -- 9. Insert a new student
+mysql> INSERT INTO college_students (student_id, name, age, department)
+    -> VALUES (4, 'Neha', 23, 'Civil Engineering');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> UPDATE college_students SET age = 24 WHERE student_id = 4;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SAVEPOINT sp1;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> DELETE FROM college_students WHERE student_id = 3;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc college_students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| department | varchar(100) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from college_students;
++------------+----------+------+------------------------+
+| student_id | name     | age  | department             |
++------------+----------+------+------------------------+
+|          1 | Aditya   |   21 | Computer Engineering   |
+|          2 | Samiksha |   22 | Information Technology |
+|          4 | Neha     |   24 | Civil Engineering      |
++------------+----------+------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> ROLLBACK TO SAVEPOINT sp1;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM college_students;
++------------+----------+------+------------------------+
+| student_id | name     | age  | department             |
++------------+----------+------+------------------------+
+|          1 | Aditya   |   21 | Computer Engineering   |
+|          2 | Samiksha |   22 | Information Technology |
+|          3 | Rahul    |   20 | Mechanical Engineering |
+|          4 | Neha     |   24 | Civil Engineering      |
++------------+----------+------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql>

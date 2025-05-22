@@ -1,0 +1,18 @@
+QUE 5. Get Employee ID's of those employees who didn't receive incentives without using
+sub query ?(MINUS)
+
+mysql> SELECT e.employee_id
+    -> FROM employees e
+    -> LEFT JOIN incentives i
+    -> ON e.employee_id = i.employee_ref_id
+    -> WHERE i.employee_ref_id IS NULL;
++-------------+
+| employee_id |
++-------------+
+|           4 |
+|           5 |
+|           6 |
+|           7 |
+|           8 |
++-------------+
+5 rows in set (0.00 sec)

@@ -1,0 +1,171 @@
+|-------------------|-----------------------------------------|
+| Function          | What it does                            |
+|-------------------|-----------------------------------------|
+| `CURDATE()`       | Shows current date only                 |
+| `NOW()`           | Shows current date and time             |
+| `CURTIME()`       | Shows current time only                 |
+| `SYSDATE()`       | Also shows current date and time        |
+| `UTC_DATE()`      | Shows UTC (global) date                 |
+| `UTC_TIME()`      | Shows UTC time                          |
+| `UTC_TIMESTAMP()` | Shows UTC date and time                 |
+| `DATEDIFF()`      | Finds the number of days between dates  |
+| `DATE_ADD()`      | Adds days (or other time units) to date |
+| `DATE_SUB()`      | Subtracts days from a date              |
+|-------------------|-----------------------------------------|
+
+mysql> CREATE TABLE tasks (
+    ->          task_id INT PRIMARY KEY,
+    ->          task_name VARCHAR(100),
+    ->          start_date DATE,
+    ->          due_date DATE
+    ->      );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO tasks VALUES
+    ->      (1, 'Complete SQL Module', '2025-05-10', '2025-05-18'),
+    ->      (2, 'React Project', '2025-05-12', '2025-05-22'),
+    ->      (3, 'Portfolio Update', '2025-05-15', '2025-05-25');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from tasks;
++---------+---------------------+------------+------------+
+| task_id | task_name           | start_date | due_date   |
++---------+---------------------+------------+------------+
+|       1 | Complete SQL Module | 2025-05-10 | 2025-05-18 |
+|       2 | React Project       | 2025-05-12 | 2025-05-22 |
+|       3 | Portfolio Update    | 2025-05-15 | 2025-05-25 |
++---------+---------------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2025-05-19 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-05-19 08:58:16 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select date(now());
++-------------+
+| date(now()) |
++-------------+
+| 2025-05-19  |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff( '2025--5-10','2025-05-19' );
++---------------------------------------+
+| datediff( '2025--5-10','2025-05-19' ) |
++---------------------------------------+
+|                                    -9 |
++---------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select datediff( '2025-05-10','2025-05-19' );
++---------------------------------------+
+| datediff( '2025-05-10','2025-05-19' ) |
++---------------------------------------+
+|                                    -9 |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff( '2025-05-19','2025-05-10' );
++---------------------------------------+
+| datediff( '2025-05-19','2025-05-10' ) |
++---------------------------------------+
+|                                     9 |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select curtime();
++-----------+
+| curtime() |
++-----------+
+| 09:02:27  |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select sysdate();
++---------------------+
+| sysdate()           |
++---------------------+
+| 2025-05-19 09:03:05 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select utc_date();
++------------+
+| utc_date() |
++------------+
+| 2025-05-19 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select utc_time();
++------------+
+| utc_time() |
++------------+
+| 03:33:49   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select utc_time();
++------------+
+| utc_time() |
++------------+
+| 03:34:02   |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select utc_timestamp();
++---------------------+
+| utc_timestamp()     |
++---------------------+
+| 2025-05-19 03:34:16 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_add( '2025-05-20',interval 10 day );
++------------------------------------------+
+| date_add( '2025-05-20',interval 10 day ) |
++------------------------------------------+
+| 2025-05-30                               |
++------------------------------------------+
+1 row in set (0.00 sec)
+Adds 10 days to May 20 → Result: May 30
+
+mysql> select date_add( '2025-05-19',interval 9 day );
++-----------------------------------------+
+| date_add( '2025-05-19',interval 9 day ) |
++-----------------------------------------+
+| 2025-05-28                              |
++-----------------------------------------+
+1 row in set (0.00 sec)
+Adds 9 days to May 19 → Result: May 28
+
+mysql> select date_add( '2025-05-19',interval 23 day );
++------------------------------------------+
+| date_add( '2025-05-19',interval 23 day ) |
++------------------------------------------+
+| 2025-06-11                               |
++------------------------------------------+
+1 row in set (0.00 sec)
+Adds 23 days to May 19 → Result: June 11
+
+mysql> select date_sub( '2025-05-19',interval 23 day );
++------------------------------------------+
+| date_sub( '2025-05-19',interval 23 day ) |
++------------------------------------------+
+| 2025-04-26                               |
++------------------------------------------+
+1 row in set (0.00 sec)
+Subtracts 23 days from May 19 → Result: April 26

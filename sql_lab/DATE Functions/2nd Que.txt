@@ -1,0 +1,14 @@
+QUE 2. Get employee details from employee table whose joining month is “January”
+
+mysql> SELECT *
+    -> FROM employees
+    -> WHERE MONTH(joining_date)=1;
++-------------+------------+-----------+---------+---------------------+------------+
+| employee_id | First_name | Last_name | Salary  | Joining_date        | Department |
++-------------+------------+-----------+---------+---------------------+------------+
+|           1 | John       | Abraham   | 1000000 | 2013-01-01 12:00:00 | Banking    |
+|           2 | Michael    | Clarke    |  800000 | 2013-01-01 12:00:00 | Insurance  |
+|           6 | Philip     | Mathew    |  750000 | 2013-01-01 12:00:00 | Services   |
+|           7 | TestName1  | 123       |  650000 | 2013-01-01 12:00:00 | Services   |
++-------------+------------+-----------+---------+---------------------+------------+
+4 rows in set (0.00 sec)

@@ -1,0 +1,137 @@
+
+
+							--------------- SCHEME ---------------
+
+mysql> USE Profile;
+
+mysql> CREATE SCHEMA profile;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE TABLE profile.users(
+    -> user_id INT,
+    -> age INT^C
+mysql> ^C
+mysql> CREATE TABLE profile.users(
+    -> user_id INT PRIMARY KEY,
+    -> age INT,
+    -> full_name VARCHAR(100),
+    -> city VARCHAR(50),
+    -> tech_stack VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO my_profile.users (user_id, age, full_name, city, tech_stack)
+    -> VALUES
+    -> (1, 22, 'Swaraj Phalke', 'Satara', 'MERN Stack, Java'),
+    -> (2, 25, 'Anjali Sharma', 'Pune', 'Python, Django'),
+    -> (3, 24, 'Rohit Singh', 'Mumbai', 'React, Node.js'),
+    -> (4, 23, 'Meena Joshi', 'Nashik', 'Java, Spring Boot'),
+    -> (5, 26, 'Aditya Patil', 'Kolhapur', 'Angular, Firebase');
+ERROR 1049 (42000): Unknown database 'my_profile'
+mysql> INSERT INTO profile.users (user_id, age, full_name, city, tech_stack)
+    -> VALUES
+    -> (1, 22, 'Swaraj Phalke', 'Satara', 'MERN Stack, Java'),
+    -> (2, 25, 'Anjali Sharma', 'Pune', 'Python, Django'),
+    -> (3, 24, 'Rohit Singh', 'Mumbai', 'React, Node.js'),
+    -> (4, 23, 'Meena Joshi', 'Nashik', 'Java, Spring Boot'),
+    -> (5, 26, 'Aditya Patil', 'Kolhapur', 'Angular, Firebase');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM profile.users;
++---------+------+---------------+----------+-------------------+
+| user_id | age  | full_name     | city     | tech_stack        |
++---------+------+---------------+----------+-------------------+
+|       1 |   22 | Swaraj Phalke | Satara   | MERN Stack, Java  |
+|       2 |   25 | Anjali Sharma | Pune     | Python, Django    |
+|       3 |   24 | Rohit Singh   | Mumbai   | React, Node.js    |
+|       4 |   23 | Meena Joshi   | Nashik   | Java, Spring Boot |
+|       5 |   26 | Aditya Patil  | Kolhapur | Angular, Firebase |
++---------+------+---------------+----------+-------------------+
+5 rows in set (0.00 sec)
+
+
+							--------------- INDEX ---------------
+
+**without index** 
+
+mysql> SELECT * FROM profile.users WHERE city = "Pune";
++---------+------+---------------+------+----------------+
+| user_id | age  | full_name     | city | tech_stack     |
++---------+------+---------------+------+----------------+
+|       2 |   25 | Anjali Sharma | Pune | Python, Django |
++---------+------+---------------+------+----------------+
+1 row in set (0.01 sec)
+
+**creating index**
+
+mysql> CREATE INDEX idx_city ON profile.users(city);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM profile.users WHERE city = "Pune";
++---------+------+---------------+------+----------------+
+| user_id | age  | full_name     | city | tech_stack     |
++---------+------+---------------+------+----------------+
+|       2 |   25 | Anjali Sharma | Pune | Python, Django |
++---------+------+---------------+------+----------------+
+1 row in set (0.00 sec)
+
+**checking if index is present or not**
+
+mysql> SHOW INDEX FROM profile.users;
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| users |          0 | PRIMARY  |            1 | user_id     | A         |           5 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| users |          1 | idx_city |            1 | city        | A         |           5 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+2 rows in set (0.02 sec)
+
+
+							--------------- SEQUENCE ---------------
+
+mysql> ALTER TABLE profile.users
+    -> MODIFY user_id INT AUTO_INCREMENT;
+Query OK, 5 rows affected (0.06 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> desc profile.users;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| user_id    | int          | NO   | PRI | NULL    | auto_increment |
+| age        | int          | YES  |     | NULL    |                |
+| full_name  | varchar(100) | YES  |     | NULL    |                |
+| city       | varchar(50)  | YES  | MUL | NULL    |                |
+| tech_stack | varchar(100) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> INSERT INTO profile.users (age, full_name, city, tech_stack)
+    -> VALUES (29, 'Viraj Phalke', 'Satara', 'MERN Stack, Java');
+    -> (28, 'Neha Kulkarni', 'Pune', 'React, Node.js'),
+    -> (30, 'Rajesh Patil', 'Mumbai', 'Java, Spring Boot'),
+    -> (27, 'Sneha Deshmukh', 'Nashik', 'Python, Flask'),
+    -> (24, 'Kiran More', 'Kolhapur', 'Angular, Firebase'),
+    -> (26, 'Amit Joshi', 'Satara', 'MERN Stack');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM profile.users;
++---------+------+----------------+----------+-------------------+
+| user_id | age  | full_name      | city     | tech_stack        |
++---------+------+----------------+----------+-------------------+
+|       1 |   22 | Swaraj Phalke  | Satara   | MERN Stack, Java  |
+|       2 |   25 | Anjali Sharma  | Pune     | Python, Django    |
+|       3 |   24 | Rohit Singh    | Mumbai   | React, Node.js    |
+|       4 |   23 | Meena Joshi    | Nashik   | Java, Spring Boot |
+|       5 |   26 | Aditya Patil   | Kolhapur | Angular, Firebase |
+|       6 |   29 | Viraj Phalke   | Satara   | MERN Stack, Java  |
+|       7 |   28 | Neha Kulkarni  | Pune     | React, Node.js    |
+|       8 |   30 | Rajesh Patil   | Mumbai   | Java, Spring Boot |
+|       9 |   27 | Sneha Deshmukh | Nashik   | Python, Flask     |
+|      10 |   24 | Kiran More     | Kolhapur | Angular, Firebase |
+|      11 |   26 | Amit Joshi     | Satara   | MERN Stack        |
++---------+------+----------------+----------+-------------------+
+11 rows in set (0.00 sec)

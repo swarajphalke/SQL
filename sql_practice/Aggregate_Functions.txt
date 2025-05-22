@@ -1,0 +1,192 @@
+| Function                | Meaning (Easy Words)                                       | Example                                                                            |
+| ----------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **COUNT()**             | Counts how many rows (or non-null values) are there        | `SELECT COUNT(*) FROM students;` → Total number of students                        |
+| **FIRST()**\*           | Returns the first value in a group (not standard in MySQL) | Not directly supported, use: `SELECT name FROM students ORDER BY id ASC LIMIT 1;`  |
+| **LAST()**\*            | Returns the last value in a group (not standard in MySQL)  | Not directly supported, use: `SELECT name FROM students ORDER BY id DESC LIMIT 1;` |
+| **MAX()**               | Finds the largest value                                    | `SELECT MAX(marks) FROM students;` → Highest marks                                 |
+| **MIN()**               | Finds the smallest value                                   | `SELECT MIN(marks) FROM students;` → Lowest marks                                  |
+| **SUM()**               | Adds up all the values                                     | `SELECT SUM(marks) FROM students;` → Total marks                                   |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+								-------------COUNT(*) FUNCTION-------------
+
+mysql> select payment_method, count(*) from online_orders group by payment_method;
++----------------+----------+
+| payment_method | count(*) |
++----------------+----------+
+| UPI            |        2 |
+| CASH           |        1 |
+| Credit Card    |        2 |
+| Debit Card     |        1 |
++----------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select count(*) from online_orders;
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+
+mysql> select count(*) as Total from sales_data;
++-------+
+| Total |
++-------+
+|     6 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select city, count(*) from sales_data group by city;
++--------+----------+
+| city   | count(*) |
++--------+----------+
+| Pune   |        2 |
+| Mumbai |        2 |
+| Delhi  |        2 |
++--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select count(*) as Pune_Orders from sales_data where city='pune';
++-------------+
+| Pune_Orders |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+                            -------------FIRST FUNCTION-------------
+							
+mysql> select * from sales_data order by id asc limit 1;
++----+--------------+------+----------+----------+
+| id | product_name | city | quantity | price    |
++----+--------------+------+----------+----------+
+|  1 | Laptop       | Pune |        3 | 50000.00 |
++----+--------------+------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from sales_data order by id asc limit 2;
++----+--------------+--------+----------+----------+
+| id | product_name | city   | quantity | price    |
++----+--------------+--------+----------+----------+
+|  1 | Laptop       | Pune   |        3 | 50000.00 |
+|  2 | Mobile       | Mumbai |        5 | 20000.00 |
++----+--------------+--------+----------+----------+
+2 rows in set (0.00 sec)
+
+
+                            -------------LAST FUNCTION-------------
+							
+mysql> select * from sales_data order by id desc limit 1;
++----+--------------+-------+----------+----------+
+| id | product_name | city  | quantity | price    |
++----+--------------+-------+----------+----------+
+|  6 | Tablet       | Delhi |        3 | 14000.00 |
++----+--------------+-------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from sales_data order by id desc limit 2;
++----+--------------+-------+----------+----------+
+| id | product_name | city  | quantity | price    |
++----+--------------+-------+----------+----------+
+|  6 | Tablet       | Delhi |        3 | 14000.00 |
+|  5 | Mobile       | Pune  |        4 | 21000.00 |
++----+--------------+-------+----------+----------+
+2 rows in set (0.00 sec)
+
+                            -------------MIN FUNCTION-------------
+
+ mysql> select min(price) from sales_data;
++------------+
+| min(price) |
++------------+
+|   14000.00 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(quantity) from sales_data;
++---------------+
+| min(quantity) |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select city,min(quantity) from sales_data group by city;
++--------+---------------+
+| city   | min(quantity) |
++--------+---------------+
+| Pune   |             3 |
+| Mumbai |             1 |
+| Delhi  |             2 |
++--------+---------------+
+3 rows in set (0.00 sec)
+
+                            -------------MAX FUNCTION-------------
+
+mysql> select max(price) from sales_data;
++------------+
+| max(price) |
++------------+
+|   50000.00 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from employee;
++-------------+
+| max(salary) |
++-------------+
+|     1000000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select department, max(salary) from employee group by department;
++------------+-------------+
+| department | max(salary) |
++------------+-------------+
+| Banking    |     1000000 |
+| Insurance  |      800000 |
+| Services   |      750000 |
++------------+-------------+
+3 rows in set (0.00 sec)
+
+                            -------------SUM FUNCTION-------------
+							
+mysql> select sum(quantity) as orders from sales_data;
++--------+
+| orders |
++--------+
+|     18 |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select sum(price) from sales_data;
++------------+
+| sum(price) |
++------------+
+|  168000.00 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select city, sum(quantity) as products from online_orders group by city;
++-----------+----------+
+| city      | products |
++-----------+----------+
+| Bangalore |        2 |
+| Delhi     |        3 |
+| Mumbai    |        2 |
+| Pune      |        3 |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select department, sum(salary) as Total from employee group by department;
++------------+---------+
+| department | Total   |
++------------+---------+
+| Banking    | 1700000 |
+| Insurance  | 2650000 |
+| Services   | 1400000 |
++------------+---------+
+3 rows in set (0.00 sec)
+

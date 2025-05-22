@@ -1,0 +1,19 @@
+QUE 6. Select no of employees joined with respect to year and month from employee table
+
+mysql> SELECT
+    ->     EXTRACT(YEAR FROM Joining_date) AS Join_Year,
+    ->     EXTRACT(MONTH FROM Joining_date) AS Join_Month,
+    ->     COUNT(*) AS No_of_employees
+    -> FROM Employees
+    -> GROUP BY
+    ->     EXTRACT(YEAR FROM Joining_date),
+    ->     EXTRACT(MONTH FROM Joining_date)
+    -> ORDER BY
+    ->     Join_Year, Join_Month;
++-----------+------------+-----------------+
+| Join_Year | Join_Month | No_of_employees |
++-----------+------------+-----------------+
+|      2013 |          1 |               4 |
+|      2013 |          2 |               4 |
++-----------+------------+-----------------+
+2 rows in set (0.00 sec)

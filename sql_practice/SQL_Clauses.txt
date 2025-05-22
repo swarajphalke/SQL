@@ -1,0 +1,265 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| honeypotappdb      |
+| information_schema |
+| mysql              |
+| performance_schema |
+| profound           |
+| sys                |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> use profound;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_profound |
++--------------------+
+| course             |
+| courses            |
+| employee           |
+| incentives         |
+| stud               |
+| students           |
++--------------------+
+6 rows in set (0.01 sec)
+
+mysql> create table online_order (
+    ->          order_id int primary key,
+    ->          customer_name varchar(30),
+    ->          product_name varchar(30),
+    ->          quantity int,
+    ->          order_date date,
+    ->          city varchar(30),
+    ->          payment_method varchar(30)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+ 
+mysql> insert into online_order values(1,'Amit','Laptop',2,'2024-05-04','Bangalore','UPI');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> alter table online_order
+    ->  rename online_orders;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_profound |
++--------------------+
+| course             |
+| courses            |
+| employee           |
+| incentives         |
+| online_orders      |
+| stud               |
+| students           |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> insert into online_orders values(2,'Ravi','Keyboard',3,'2024-05-03','Delhi','CASH');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into online_orders values(3,'Neha','Laptop',1,'2024-05-02','Mumbai','Credit Card');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into online_orders values(4,'Neha','Headphones',1,'2024-05-04','Mumbai','Credit Card');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into online_orders values(5,'Aditya','Headphones',2,'2024-05-01','Pune','UPI');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into online_orders values(6,'Sneha','Mouse',1,'2024-05-03','Pune','Debit Card');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from online_orders;
++----------+---------------+--------------+----------+------------+-----------+----------------+
+| order_id | customer_name | product_name | quantity | order_date | city      | payment_method |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+|        1 | Amit          | Laptop       |        2 | 2024-05-04 | Bangalore | UPI            |
+|        2 | Ravi          | Keyboard     |        3 | 2024-05-03 | Delhi     | CASH           |
+|        3 | Neha          | Laptop       |        1 | 2024-05-02 | Mumbai    | Credit Card    |
+|        4 | Neha          | Headphones   |        1 | 2024-05-04 | Mumbai    | Credit Card    |
+|        5 | Aditya        | Headphones   |        2 | 2024-05-01 | Pune      | UPI            |
+|        6 | Sneha         | Mouse        |        1 | 2024-05-03 | Pune      | Debit Card     |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+6 rows in set (0.00 sec)
+
+                            -------------ORDER BY CLAUSE-------------
+
+mysql> select * from online_orders order by order_date desc;
++----------+---------------+--------------+----------+------------+-----------+----------------+
+| order_id | customer_name | product_name | quantity | order_date | city      | payment_method |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+|        1 | Amit          | Laptop       |        2 | 2024-05-04 | Bangalore | UPI            |
+|        4 | Neha          | Headphones   |        1 | 2024-05-04 | Mumbai    | Credit Card    |
+|        2 | Ravi          | Keyboard     |        3 | 2024-05-03 | Delhi     | CASH           |
+|        6 | Sneha         | Mouse        |        1 | 2024-05-03 | Pune      | Debit Card     |
+|        3 | Neha          | Laptop       |        1 | 2024-05-02 | Mumbai    | Credit Card    |
+|        5 | Aditya        | Headphones   |        2 | 2024-05-01 | Pune      | UPI            |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from online_orders order by order_date asc;
++----------+---------------+--------------+----------+------------+-----------+----------------+
+| order_id | customer_name | product_name | quantity | order_date | city      | payment_method |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+|        5 | Aditya        | Headphones   |        2 | 2024-05-01 | Pune      | UPI            |
+|        3 | Neha          | Laptop       |        1 | 2024-05-02 | Mumbai    | Credit Card    |
+|        2 | Ravi          | Keyboard     |        3 | 2024-05-03 | Delhi     | CASH           |
+|        6 | Sneha         | Mouse        |        1 | 2024-05-03 | Pune      | Debit Card     |
+|        1 | Amit          | Laptop       |        2 | 2024-05-04 | Bangalore | UPI            |
+|        4 | Neha          | Headphones   |        1 | 2024-05-04 | Mumbai    | Credit Card    |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select payment_method from online_orders order by quantity asc;
++----------------+
+| payment_method |
++----------------+
+| Credit Card    |
+| Credit Card    |
+| Debit Card     |
+| UPI            |
+| UPI            |
+| CASH           |
++----------------+
+6 rows in set (0.00 sec)
+
+                                -------------WHERE CLAUSE-------------
+								
+mysql> select * from online_orders where quantity>=2;
++----------+---------------+--------------+----------+------------+-----------+----------------+
+| order_id | customer_name | product_name | quantity | order_date | city      | payment_method |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+|        1 | Amit          | Laptop       |        2 | 2024-05-04 | Bangalore | UPI            |
+|        2 | Ravi          | Keyboard     |        3 | 2024-05-03 | Delhi     | CASH           |
+|        5 | Aditya        | Headphones   |        2 | 2024-05-01 | Pune      | UPI            |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from online_orders where order_id between 1 and 2;
++----------+---------------+--------------+----------+------------+-----------+----------------+
+| order_id | customer_name | product_name | quantity | order_date | city      | payment_method |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+|        1 | Amit          | Laptop       |        2 | 2024-05-04 | Bangalore | UPI            |
+|        2 | Ravi          | Keyboard     |        3 | 2024-05-03 | Delhi     | CASH           |
++----------+---------------+--------------+----------+------------+-----------+----------------+
+2 rows in set (0.00 sec)
+
+							-------------GROUP BY CLAUSE-------------
+							
+mysql> select payment_method, count(*) from online_orders group by payment_method;
++----------------+----------+
+| payment_method | count(*) |
++----------------+----------+
+| UPI            |        2 |
+| CASH           |        1 |
+| Credit Card    |        2 |
+| Debit Card     |        1 |
++----------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select city, count(*) from online_orders group by city;
++-----------+----------+
+| city      | count(*) |
++-----------+----------+
+| Bangalore |        1 |
+| Delhi     |        1 |
+| Mumbai    |        2 |
+| Pune      |        2 |
++-----------+----------+
+4 rows in set (0.00 sec)
+
+
+							-------------HAVING BY CLAUSE-------------
+
+mysql> select city, count(*) AS Total from online_orders group by city having Total>1;
++--------+-------+
+| city   | Total |
++--------+-------+
+| Mumbai |     2 |
+| Pune   |     2 |
++--------+-------+
+2 rows in set (0.00 sec
+
+mysql> select product_name , count(*) as Product_Quantity from online_orders group by product_name having Product_Quantity>1;
++--------------+------------------+
+| product_name | Product_Quantity |
++--------------+------------------+
+| Laptop       |                2 |
+| Headphones   |                2 |
++--------------+------------------+
+
+							-------------LIMIT-------------
+							
+mysql> select * from employee limit 1;
++-------------+------------+-----------+---------+---------------------+------------+------+
+| Employee_id | First_name | Last_name | Salary  | joining_date        | Department | Age  |
++-------------+------------+-----------+---------+---------------------+------------+------+
+|           1 | John       | Abraham   | 1000000 | 2013-01-01 12:00:00 | Banking    |   22 |
++-------------+------------+-----------+---------+---------------------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select First_name from employee limit 2;
++------------+
+| First_name |
++------------+
+| John       |
+| Michael    |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee order by employee_id desc limit 1;
++-------------+------------+-----------+--------+---------------------+------------+------+
+| Employee_id | First_name | Last_name | Salary | joining_date        | Department | Age  |
++-------------+------------+-----------+--------+---------------------+------------+------+
+|           8 | TestName2  | TestName2 | 600000 | 2013-02-01 12:00:00 | Insurance  |   21 |
++-------------+------------+-----------+--------+---------------------+------------+------+
+1 row in set (0.00 sec)							
+
+							-------------IN CLAUSE-------------
+							
+mysql> select * from employee order by employee_id desc limit 1;
++-------------+------------+-----------+--------+---------------------+------------+------+
+| Employee_id | First_name | Last_name | Salary | joining_date        | Department | Age  |
++-------------+------------+-----------+--------+---------------------+------------+------+
+|           8 | TestName2  | TestName2 | 600000 | 2013-02-01 12:00:00 | Insurance  |   21 |
++-------------+------------+-----------+--------+---------------------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from online_orders where city in ('pune');
++----------+---------------+--------------+----------+------------+------+----------------+
+| order_id | customer_name | product_name | quantity | order_date | city | payment_method |
++----------+---------------+--------------+----------+------------+------+----------------+
+|        5 | Aditya        | Headphones   |        2 | 2024-05-01 | Pune | UPI            |
+|        6 | Sneha         | Mouse        |        1 | 2024-05-03 | Pune | Debit Card     |
++----------+---------------+--------------+----------+------------+------+----------------+
+2 rows in set (0.00 sec)
+
+							-------------BETWEEN-------------
+
+mysql> select * from employee where employee_id between 2 and 6;
++-------------+------------+-----------+--------+---------------------+------------+------+
+| Employee_id | First_name | Last_name | Salary | joining_date        | Department | Age  |
++-------------+------------+-----------+--------+---------------------+------------+------+
+|           2 | Michael    | Clarke    | 800000 | 2013-01-01 12:00:00 | Insurance  |   28 |
+|           3 | Roy        | Thomas    | 700000 | 2013-02-01 12:00:00 | Banking    |   31 |
+|           4 | Tom        | Jose      | 600000 | 2013-02-01 12:00:00 | Insurance  |   22 |
+|           5 | Jerry      | pintu     | 650000 | 2013-02-01 12:00:00 | Insurance  |   29 |
+|           6 | Philip     | Mathew    | 750000 | 2013-01-01 12:00:00 | Services   |   24 |
++-------------+------------+-----------+--------+---------------------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where age between 21 and 25;
++-------------+------------+-----------+---------+---------------------+------------+------+
+| Employee_id | First_name | Last_name | Salary  | joining_date        | Department | Age  |
++-------------+------------+-----------+---------+---------------------+------------+------+
+|           1 | John       | Abraham   | 1000000 | 2013-01-01 12:00:00 | Banking    |   22 |
+|           4 | Tom        | Jose      |  600000 | 2013-02-01 12:00:00 | Insurance  |   22 |
+|           6 | Philip     | Mathew    |  750000 | 2013-01-01 12:00:00 | Services   |   24 |
+|           8 | TestName2  | TestName2 |  600000 | 2013-02-01 12:00:00 | Insurance  |   21 |
++-------------+------------+-----------+---------+---------------------+------------+------+
+4 rows in set (0.00 sec)

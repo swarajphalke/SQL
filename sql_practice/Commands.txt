@@ -1,0 +1,49 @@
+Sql commands
+1.DDL-Data defination language
+2.DML-Data manipulation language
+3.DCL-Data control language
+4.TCL-Transaction control language
+5.DQL-Data query language
+
+1.DDL (Data Definition Language)
+CREATE – Creates a new table or database.
+
+ALTER – Modifies an existing table.
+
+DROP – Deletes a table or database permanently.
+
+TRUNCATE – Deletes all records from a table (keeps structure).
+
+RENAME – Renames a table.
+
+
+
+2.DML (Data Manipulation Language)
+INSERT – Adds new data to a table.
+
+UPDATE – Modifies existing data.
+
+DELETE – Removes specific rows from a table.
+
+
+
+
+3.DCL (Data Control Language)
+GRANT – Gives user access privileges.
+
+REVOKE – Removes access privileges.
+
+
+
+
+4.TCL (Transaction Control Language)
+COMMIT – Saves the transaction.
+
+ROLLBACK – Undoes changes since the last commit.
+
+SAVEPOINT – Sets a point to rollback to.
+
+
+
+3.DQL (Data Query Language)
+SELECT – Retrieves data from one or more tables.

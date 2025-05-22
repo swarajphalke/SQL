@@ -1,0 +1,4 @@
+QUE 3. drop View
+
+mysql> DROP VIEW EmployeeView;
+Query OK, 0 rows affected (0.01 sec)

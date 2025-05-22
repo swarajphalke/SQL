@@ -1,0 +1,36 @@
+********** QUE 2. Add Primary key Constrains to both table **********
+
+mysql> ALTER TABLE employees
+    -> ADD PRIMARY KEY (employee_id);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employee_id  | int         | NO   | PRI | NULL    |       |
+| First_name   | varchar(50) | YES  |     | NULL    |       |
+| Last_name    | varchar(50) | YES  |     | NULL    |       |
+| Salary       | int         | YES  |     | NULL    |       |
+| Joining_date | datetime    | YES  |     | NULL    |       |
+| Department   | varchar(50) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> ALTER TABLE incentives
+    -> ADD PRIMARY KEY (employee_ref_id,incentive_date);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc incentives;
++------------------+------+------+-----+---------+-------+
+| Field            | Type | Null | Key | Default | Extra |
++------------------+------+------+-----+---------+-------+
+| Employee_ref_id  | int  | NO   | PRI | NULL    |       |
+| incentive_date   | date | NO   | PRI | NULL    |       |
+| Incentive_amount | int  | YES  |     | NULL    |       |
++------------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+

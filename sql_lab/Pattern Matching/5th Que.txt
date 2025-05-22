@@ -1,0 +1,17 @@
+QUE 5. Get employee details from employee table whose Salary between 500000 and 800000
+
+mysql> SELECT *
+    -> FROM employees
+    -> WHERE salary BETWEEN 500000 AND 800000;
++-------------+------------+-----------+--------+---------------------+------------+
+| employee_id | First_name | Last_name | Salary | Joining_date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           2 | Michael    | Clarke    | 800000 | 2013-01-01 12:00:00 | Insurance  |
+|           3 | Roy        | Thomas    | 700000 | 2013-02-01 12:00:00 | Banking    |
+|           4 | Tom        | Jose      | 600000 | 2013-02-01 12:00:00 | Insurance  |
+|           5 | Jerry      | Pinto     | 650000 | 2013-02-01 12:00:00 | Insurance  |
+|           6 | Philip     | Mathew    | 750000 | 2013-01-01 12:00:00 | Services   |
+|           7 | TestName1  | 123       | 650000 | 2013-01-01 12:00:00 | Services   |
+|           8 | TestName2  | Lname%    | 600000 | 2013-02-01 12:00:00 | Insurance  |
++-------------+------------+-----------+--------+---------------------+------------+
+7 rows in set (0.00 sec)

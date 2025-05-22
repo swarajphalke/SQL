@@ -1,0 +1,232 @@
+mysql> use profound;
+Database changed
+mysql> select * from employees;
++--------+----------+---------+
+| emp_id | emp_name | dept_id |
++--------+----------+---------+
+|      1 | Aditya   |     101 |
+|      2 | Riya     |     102 |
+|      3 | Karan    |     103 |
+|      4 | Sneha    |    NULL |
++--------+----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from departments;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|     101 | HR        |
+|     102 | IT        |
+|     103 | Sales     |
+|     104 | Marketing |
++---------+-----------+
+4 rows in set (0.00 sec)
+
+                            -------------INNER JOIN------------
+
+mysql> select *
+     from employees as e
+     right join departments as d
+     on e.dept_id = d.dept_id;
++--------+----------+---------+---------+-----------+
+| emp_id | emp_name | dept_id | dept_id | dept_name |
++--------+----------+---------+---------+-----------+
+|      1 | Aditya   |     101 |     101 | HR        |
+|      2 | Riya     |     102 |     102 | IT        |
+|      3 | Karan    |     103 |     103 | Sales     |
++--------+----------+---------+---------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select e.dept_id,e.emp_name,d.dept_name
+    -> from Employees as e
+    -> inner join Departments as d
+    -> on e.dept_id = d.dept_id;
++---------+----------+-----------+
+| dept_id | emp_name | dept_name |
++---------+----------+-----------+
+|     101 | Aditya   | HR        |
+|     102 | Riya     | IT        |
+|     103 | Karan    | Sales     |
++---------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select e.emp_name,d.dept_id
+    -> from employees as e
+    -> inner join departments as d
+    -> on e.dept_id = d.dept_id;
++----------+---------+
+| emp_name | dept_id |
++----------+---------+
+| Aditya   |     101 |
+| Riya     |     102 |
+| Karan    |     103 |
++----------+---------+
+3 rows in set (0.00 sec)
+
+                            -------------LEFT JOIN------------
+
+mysql> select *
+    -> from employees as e
+    -> left join departments as d
+    -> on e.dept_id = d.dept_id;
++--------+----------+---------+---------+-----------+
+| emp_id | emp_name | dept_id | dept_id | dept_name |
++--------+----------+---------+---------+-----------+
+|      1 | Aditya   |     101 |     101 | HR        |
+|      2 | Riya     |     102 |     102 | IT        |
+|      3 | Karan    |     103 |     103 | Sales     |
+|      4 | Sneha    |    NULL |    NULL | NULL      |
++--------+----------+---------+---------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select e.dept_id,e.emp_name,d.dept_name
+    -> from employees as e
+    -> left join departments as d
+    -> on e.dept_id = d.dept_id;
++---------+----------+-----------+
+| dept_id | emp_name | dept_name |
++---------+----------+-----------+
+|     101 | Aditya   | HR        |
+|     102 | Riya     | IT        |
+|     103 | Karan    | Sales     |
+|    NULL | Sneha    | NULL      |
++---------+----------+-----------+
+4 rows in set (0.00 sec)
+
+                            -------------RIGHT JOIN------------
+
+mysql> select *
+    -> from employees as e
+    -> right join Departments as d
+    -> on e.dept_id = d.dept_id;
++--------+----------+---------+---------+-----------+
+| emp_id | emp_name | dept_id | dept_id | dept_name |
++--------+----------+---------+---------+-----------+
+|      1 | Aditya   |     101 |     101 | HR        |
+|      2 | Riya     |     102 |     102 | IT        |
+|      3 | Karan    |     103 |     103 | Sales     |
+|   NULL | NULL     |    NULL |     104 | Marketing |
++--------+----------+---------+---------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select e.dept_id,e.emp_name,d.dept_name
+    -> from employees as e
+    -> right join department as d
+    -> on e.dept_id = d.dept_id;
+ERROR 1146 (42S02): Table 'profound.department' doesn't exist
+mysql> select e.dept_id,e.emp_name,d.dept_name
+    -> from employees as e
+    -> right join departments as d
+    -> on e.dept_id = d.dept_id;
++---------+----------+-----------+
+| dept_id | emp_name | dept_name |
++---------+----------+-----------+
+|     101 | Aditya   | HR        |
+|     102 | Riya     | IT        |
+|     103 | Karan    | Sales     |
+|    NULL | NULL     | Marketing |
++---------+----------+-----------+
+4 rows in set (0.00 sec)
+
+                            -------------Full JOIN------------
+
+mysql> select  *
+    -> from employees as e
+    -> left join departments as d
+    -> on e.dept_id = d.dept_id
+    ->
+    -> UNION
+    ->
+    -> select *
+    -> from employees as e
+    -> right join departments as d
+    -> on e.dept_id = d.dept_id;
++--------+----------+---------+---------+-----------+
+| emp_id | emp_name | dept_id | dept_id | dept_name |
++--------+----------+---------+---------+-----------+
+|      1 | Aditya   |     101 |     101 | HR        |
+|      2 | Riya     |     102 |     102 | IT        |
+|      3 | Karan    |     103 |     103 | Sales     |
+|      4 | Sneha    |    NULL |    NULL | NULL      |
+|   NULL | NULL     |    NULL |     104 | Marketing |
++--------+----------+---------+---------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select e.emp_id, e.emp_name, d.dept_name
+    -> from employees as e
+    -> left join departments as d
+    -> on e.dept_id = d.dept_id
+    ->
+    -> UNION
+    ->
+    -> select e.emp_id, e.emp_name, d.dept_name
+    -> from employees as e
+    -> right join departments as d
+    -> on e.dept_id = d.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|      1 | Aditya   | HR        |
+|      2 | Riya     | IT        |
+|      3 | Karan    | Sales     |
+|      4 | Sneha    | NULL      |
+|   NULL | NULL     | Marketing |
++--------+----------+-----------+
+5 rows in set (0.00 sec)
+
+                            -------------CROSS JOIN------------
+				(Hint: Think of this as: “Show me every possible combination.”)
+
+mysql> select e.dept_id, d.dept_id
+    -> from employees as e
+    -> cross join departments d;
++---------+---------+
+| dept_id | dept_id |
++---------+---------+
+|    NULL |     101 |
+|     103 |     101 |
+|     102 |     101 |
+|     101 |     101 |
+|    NULL |     102 |
+|     103 |     102 |
+|     102 |     102 |
+|     101 |     102 |
+|    NULL |     103 |
+|     103 |     103 |
+|     102 |     103 |
+|     101 |     103 |
+|    NULL |     104 |
+|     103 |     104 |
+|     102 |     104 |
+|     101 |     104 |
++---------+---------+
+16 rows in set (0.00 sec)
+
+mysql> select e.emp_name, d.dept_name
+    -> from employees as e
+    -> cross join departments as d;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Sneha    | HR        |
+| Karan    | HR        |
+| Riya     | HR        |
+| Aditya   | HR        |
+| Sneha    | IT        |
+| Karan    | IT        |
+| Riya     | IT        |
+| Aditya   | IT        |
+| Sneha    | Sales     |
+| Karan    | Sales     |
+| Riya     | Sales     |
+| Aditya   | Sales     |
+| Sneha    | Marketing |
+| Karan    | Marketing |
+| Riya     | Marketing |
+| Aditya   | Marketing |
++----------+-----------+
+16 rows in set (0.00 sec)
+
+                            -------------SELF JOIN (Advanced------------
+
+

@@ -1,0 +1,12 @@
+					QUE 1. Get unique DEPARTMENT from employee table
+
+mysql> SELECT DISTINCT department
+    -> FROM employees;
++------------+
+| department |
++------------+
+| Banking    |
+| Insurance  |
+| Services   |
++------------+
+3 rows in set (0.00 sec)

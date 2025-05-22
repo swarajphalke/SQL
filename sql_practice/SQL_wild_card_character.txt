@@ -1,0 +1,137 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| blockchainml       |
+| feedbackdb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| profound           |
+| profound_labmanual |
+| studnetdb          |
+| sys                |
++--------------------+
+9 rows in set (0.01 sec)
+
+mysql> use profound;
+Database changed
+mysql> show tables
+    -> ;
++--------------------+
+| Tables_in_profound |
++--------------------+
+| college_students   |
+| hostel_students    |
+| students           |
++--------------------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE library_members (
+    ->     member_id INT PRIMARY KEY AUTO_INCREMENT,
+    ->     member_name VARCHAR(50),
+    ->     membership_type VARCHAR(20),
+    ->     join_date DATE,
+    ->     books_borrowed INT
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO library_members (member_name, membership_type, join_date, books_borrowed) VALUES
+    -> ('Alice', 'Premium', '2024-01-10', 5),
+    -> ('Bob', 'Basic', '2024-02-15', 2),
+    -> ('Catherine', 'Premium', '2023-12-05', 7),
+    -> ('David', 'Basic', '2024-03-20', 1),
+    -> ('Samantha', 'Premium', '2024-04-10', 4),
+    -> ('Steve', 'Basic', '2024-01-25', 3);
+Query OK, 6 rows affected (0.05 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from library_member;
+ERROR 1146 (42S02): Table 'profound.library_member' doesn't exist
+mysql> select * from library_members;
++-----------+-------------+-----------------+------------+----------------+
+| member_id | member_name | membership_type | join_date  | books_borrowed |
++-----------+-------------+-----------------+------------+----------------+
+|         1 | Alice       | Premium         | 2024-01-10 |              5 |
+|         2 | Bob         | Basic           | 2024-02-15 |              2 |
+|         3 | Catherine   | Premium         | 2023-12-05 |              7 |
+|         4 | David       | Basic           | 2024-03-20 |              1 |
+|         5 | Samantha    | Premium         | 2024-04-10 |              4 |
+|         6 | Steve       | Basic           | 2024-01-25 |              3 |
++-----------+-------------+-----------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM library_members WHERE member_name LIKE 'S%';
++-----------+-------------+-----------------+------------+----------------+
+| member_id | member_name | membership_type | join_date  | books_borrowed |
++-----------+-------------+-----------------+------------+----------------+
+|         5 | Samantha    | Premium         | 2024-04-10 |              4 |
+|         6 | Steve       | Basic           | 2024-01-25 |              3 |
++-----------+-------------+-----------------+------------+----------------+
+2 rows in set (0.05 sec)
+
+mysql> SELECT * FROM library_members WHERE member_name LIKE '%s';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM library_members WHERE member_name LIKE '%a';
++-----------+-------------+-----------------+------------+----------------+
+| member_id | member_name | membership_type | join_date  | books_borrowed |
++-----------+-------------+-----------------+------------+----------------+
+|         5 | Samantha    | Premium         | 2024-04-10 |              4 |
++-----------+-------------+-----------------+------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM library_members WHERE member_name LIKE '%a%';
++-----------+-------------+-----------------+------------+----------------+
+| member_id | member_name | membership_type | join_date  | books_borrowed |
++-----------+-------------+-----------------+------------+----------------+
+|         1 | Alice       | Premium         | 2024-01-10 |              5 |
+|         3 | Catherine   | Premium         | 2023-12-05 |              7 |
+|         4 | David       | Basic           | 2024-03-20 |              1 |
+|         5 | Samantha    | Premium         | 2024-04-10 |              4 |
++-----------+-------------+-----------------+------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM library_members WHERE member_name LIKE '_';
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM library_members WHERE books_borrowed LIKE '_';
++-----------+-------------+-----------------+------------+----------------+
+| member_id | member_name | membership_type | join_date  | books_borrowed |
++-----------+-------------+-----------------+------------+----------------+
+|         1 | Alice       | Premium         | 2024-01-10 |              5 |
+|         2 | Bob         | Basic           | 2024-02-15 |              2 |
+|         3 | Catherine   | Premium         | 2023-12-05 |              7 |
+|         4 | David       | Basic           | 2024-03-20 |              1 |
+|         5 | Samantha    | Premium         | 2024-04-10 |              4 |
+|         6 | Steve       | Basic           | 2024-01-25 |              3 |
++-----------+-------------+-----------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT books_borrowed,member_name from library_members WHERE books_borrowed LIKE '_';
++----------------+-------------+
+| books_borrowed | member_name |
++----------------+-------------+
+|              5 | Alice       |
+|              2 | Bob         |
+|              7 | Catherine   |
+|              1 | David       |
+|              4 | Samantha    |
+|              3 | Steve       |
++----------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT books_borrowed,member_name from library_members WHERE books_borrowed LIKE '%e%';
+Empty set (0.00 sec)
+
+mysql> SELECT books_borrowed,member_name from library_members WHERE member_name LIKE '%e%';
++----------------+-------------+
+| books_borrowed | member_name |
++----------------+-------------+
+|              5 | Alice       |
+|              7 | Catherine   |
+|              3 | Steve       |
++----------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql>

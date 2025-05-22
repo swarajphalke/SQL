@@ -1,0 +1,14 @@
+QUE 5. Get department wise maximum salary from employee table order by salary ascending
+
+mysql> SELECT department, MAX(salary) Max_Salary
+    -> FROM employees
+    -> GROUP BY department
+    -> ORDER BY Max_Salary ASC;
++------------+------------+
+| department | Max_Salary |
++------------+------------+
+| Services   |     750000 |
+| Insurance  |     800000 |
+| Banking    |    1000000 |
++------------+------------+
+3 rows in set (0.00 sec)

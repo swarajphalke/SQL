@@ -1,0 +1,13 @@
+        QUE 1. Get department,total salary with respect to a department from employee table
+
+mysql> SELECT department, SUM(salary) as Total_Salary
+    -> FROM employees
+    -> GROUP BY department;
++------------+--------------+
+| department | Total_Salary |
++------------+--------------+
+| Banking    |      1700000 |
+| Insurance  |      2650000 |
+| Services   |      1400000 |
++------------+--------------+
+3 rows in set (0.00 sec)

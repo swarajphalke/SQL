@@ -1,0 +1,22 @@
+QUE 1. Create view for Employyee which displays id name of Employee. 
+
+
+mysql> CREATE VIEW EmployeeView AS
+    -> SELECT
+    ->          employee_id,
+    ->          CONCAT(first_name, ' ', last_name) AS employee_name
+    -> FROM
+    ->          employees;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM EmployeeView;
++-------------+------------------+
+| employee_id | employee_name    |
++-------------+------------------+
+|           4 | Tom Jose         |
+|           5 | Jerry Pinto      |
+|           6 | Philip Mathew    |
+|           7 | TestName1 123    |
+|           8 | TestName2 Lname% |
++-------------+------------------+
+5 rows in set (0.01 sec)

@@ -1,0 +1,16 @@
+				QUE 3. Get First_Name from employee table in upper case
+
+mysql> SELECT UCASE(first_name) Uppercase FROM employees;
++-----------+
+| Uppercase |
++-----------+
+| JOHN      |
+| MICHAEL   |
+| ROY       |
+| TOM       |
+| JERRY     |
+| PHILIP    |
+| TESTNAME1 |
+| TESTNAME2 |
++-----------+
+8 rows in set (0.00 sec)

@@ -1,0 +1,14 @@
+QUE 3. Get employee details from employee table who joined after January 31st
+
+mysql> SELECT *
+    -> FROM employees
+    -> WHERE joining_date > '2013-01-31';
++-------------+------------+-----------+--------+---------------------+------------+
+| employee_id | First_name | Last_name | Salary | Joining_date        | Department |
++-------------+------------+-----------+--------+---------------------+------------+
+|           3 | Roy        | Thomas    | 700000 | 2013-02-01 12:00:00 | Banking    |
+|           4 | Tom        | Jose      | 600000 | 2013-02-01 12:00:00 | Insurance  |
+|           5 | Jerry      | Pinto     | 650000 | 2013-02-01 12:00:00 | Insurance  |
+|           8 | TestName2  | Lname%    | 600000 | 2013-02-01 12:00:00 | Insurance  |
++-------------+------------+-----------+--------+---------------------+------------+
+4 rows in set (0.00 sec)

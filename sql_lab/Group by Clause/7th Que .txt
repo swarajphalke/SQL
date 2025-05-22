@@ -1,0 +1,17 @@
+QUE 7. Select department,total salary with respect to a department from employee table where
+total salary greater than 800000 order by Total_Salary descending
+
+
+mysql> SELECT department, SUM(salary) AS Total_Salary
+    -> FROM employees
+    -> GROUP BY department
+    -> HAVING Total_Salary >= 800000
+    -> ORDER BY Total_Salary DESC;
++------------+--------------+
+| department | Total_Salary |
++------------+--------------+
+| Insurance  |      2650000 |
+| Banking    |      1700000 |
+| Services   |      1400000 |
++------------+--------------+
+3 rows in set (0.00 sec)

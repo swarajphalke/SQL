@@ -1,0 +1,171 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| blockchainml       |
+| feedbackdb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| profound           |
+| profound_labmanual |
+| studnetdb          |
+| sys                |
++--------------------+
+9 rows in set (0.05 sec)
+
+mysql> use profound;
+Database changed
+mysql> CREATE TABLE hostel_students (
+    ->     roll_no INT PRIMARY KEY AUTO_INCREMENT,
+    ->     student_name VARCHAR(50),
+    ->     age INT,
+    ->     room_no INT,
+    ->     block VARCHAR(20),
+    ->     fees_paid FLOAT
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO hostel_students (student_name, age, room_no, block, fees_paid) VALUES
+    -> ('Aditya', 21, 101, 'A', 25000),
+    -> ('Neha', 20, 102, 'B', 24000),
+    -> ('Ravi', 22, 103, 'A', 23000),
+    -> ('Sneha', 21, 104, 'C', 25000),
+    -> ('Amit', 23, 105, 'B', 26000);
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM hostel_students;
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       2 | Neha         |   20 |     102 | B     |     24000 |
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
+|       4 | Sneha        |   21 |     104 | C     |     25000 |
+|       5 | Amit         |   23 |     105 | B     |     26000 |
++---------+--------------+------+---------+-------+-----------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT student_name, block FROM hostel_students;
++--------------+-------+
+| student_name | block |
++--------------+-------+
+| Aditya       | A     |
+| Neha         | B     |
+| Ravi         | A     |
+| Sneha        | C     |
+| Amit         | B     |
++--------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select roll_no from hostel_students;
++---------+
+| roll_no |
++---------+
+|       1 |
+|       2 |
+|       3 |
+|       4 |
+|       5 |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select all age from hostel_students;
++------+
+| age  |
++------+
+|   21 |
+|   20 |
+|   22 |
+|   21 |
+|   23 |
++------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct age from hostel_students;
++------+
+| age  |
++------+
+|   21 |
+|   20 |
+|   22 |
+|   23 |
++------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM hostel_students WHERE block = 'A';
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
++---------+--------------+------+---------+-------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM hostel_students ORDER BY fees_paid DESC;
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       5 | Amit         |   23 |     105 | B     |     26000 |
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       4 | Sneha        |   21 |     104 | C     |     25000 |
+|       2 | Neha         |   20 |     102 | B     |     24000 |
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
++---------+--------------+------+---------+-------+-----------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM hostel_students ORDER BY fees_paid asce;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'asce' at line 1
+mysql> SELECT * FROM hostel_students ORDER BY fees_paid ase;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ase' at line 1
+mysql> SELECT * FROM hostel_students ORDER BY fees_paid ASC;
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
+|       2 | Neha         |   20 |     102 | B     |     24000 |
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       4 | Sneha        |   21 |     104 | C     |     25000 |
+|       5 | Amit         |   23 |     105 | B     |     26000 |
++---------+--------------+------+---------+-------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM hostel_students LIMIT 3;
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       2 | Neha         |   20 |     102 | B     |     24000 |
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
++---------+--------------+------+---------+-------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM hostel_students WHERE fees_paid BETWEEN 23000 AND 25000;
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       2 | Neha         |   20 |     102 | B     |     24000 |
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
+|       4 | Sneha        |   21 |     104 | C     |     25000 |
++---------+--------------+------+---------+-------+-----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM hostel_students WHERE fees_paid room_no<103;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'room_no<103' at line 1
+mysql> SELECT * FROM hostel_students WHERE fees_paid = 'yes' AND room_no < 103;
+Empty set, 1 warning (0.01 sec)
+
+mysql>  SELECT * FROM hostel_students WHERE fees_paid BETWEEN 23000 AND 25000;
++---------+--------------+------+---------+-------+-----------+
+| roll_no | student_name | age  | room_no | block | fees_paid |
++---------+--------------+------+---------+-------+-----------+
+|       1 | Aditya       |   21 |     101 | A     |     25000 |
+|       2 | Neha         |   20 |     102 | B     |     24000 |
+|       3 | Ravi         |   22 |     103 | A     |     23000 |
+|       4 | Sneha        |   21 |     104 | C     |     25000 |
++---------+--------------+------+---------+-------+-----------+
+4 rows in set (0.00 sec)
+
+mysql>

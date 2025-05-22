@@ -1,0 +1,224 @@
+| Function                | Meaning (Easy Words)                                       | Example                                                                            |
+| ----------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------- |                                  |
+| **UCASE() / UPPER()**   | Converts text to UPPERCASE                                 | `SELECT UCASE(name) FROM students;`                                                |
+| **LCASE() / LOWER()**   | Converts text to lowercase                                 | `SELECT LCASE(name) FROM students;`                                                |
+| **MID() / SUBSTRING()** | Gets part of the text                                      | `SELECT MID(name, 1, 3) FROM students;` → First 3 letters of names                 |
+| **LENGTH()**            | Finds number of characters                                 | `SELECT LENGTH(name) FROM students;`                                               |
+| **ROUND()**             | Rounds a number to nearest whole or specific decimal       | `SELECT ROUND(average_marks, 1) FROM students;`                                    |
+| **NOW()**               | Returns current date and time                              | `SELECT NOW();`                                                                    |
+| **FORMAT()**            | Formats a number (like for currency, commas, etc.)         | `SELECT FORMAT(1234567.891, 2);` → `1,234,567.89`                                  |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+							-------------UCASE FUNCTION-------------
+
+
+mysql> select ucase(city) from sales_data;
++-------------+
+| ucase(city) |
++-------------+
+| PUNE        |
+| MUMBAI      |
+| DELHI       |
+| MUMBAI      |
+| PUNE        |
+| DELHI       |
++-------------+
+6 rows in set (0.00 sec)
+
+mysql> select ucase(price) from sales_data;
++--------------+
+| ucase(price) |
++--------------+
+| 50000.00     |
+| 20000.00     |
+| 15000.00     |
+| 48000.00     |
+| 21000.00     |
+| 14000.00     |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> select ucase(Last_name) from employee;
++------------------+
+| ucase(Last_name) |
++------------------+
+| ABRAHAM          |
+| CLARKE           |
+| THOMAS           |
+| JOSE             |
+| PINTU            |
+| MATHEW           |
+| TESTNAME1        |
+| TESTNAME2        |
++------------------+
+8 rows in set (0.00 sec)
+
+                            -------------LCASE FUNCTION-------------
+
+mysql> select lcase(First_name) as Lowercase from employee;
++-----------+
+| Lowercase |
++-----------+
+| john      |
+| michael   |
+| roy       |
+| tom       |
+| jerry     |
+| philip    |
+| testname1 |
+| testname2 |
++-----------+
+8 rows in set (0.00 sec)
+
+mysql> select lcase(city) as Lowercase from sales_data;
++-----------+
+| Lowercase |
++-----------+
+| pune      |
+| mumbai    |
+| delhi     |
+| mumbai    |
+| pune      |
+| delhi     |
++-----------+
+6 rows in set (0.00 sec)
+
+
+                            -------------MID FUNCTION------------
+
+mysql> select mid(First_name,1,3) from employee where Employee_id between 2 and 5;
++---------------------+
+| mid(First_name,1,3) |
++---------------------+
+| Mic                 |
+| Roy                 |
+| Tom                 |
+| Jer                 |
++---------------------+
+4 rows in set (0.00 sec)
+
+mysql> select mid(city,1,4) as Four_Letters from sales_data;
++--------------+
+| Four_Letters |
++--------------+
+| Pune         |
+| Mumb         |
+| Delh         |
+| Mumb         |
+| Pune         |
+| Delh         |
++--------------+
+6 rows in set (0.00 sec)
+
+                            -------------LENGTH FUNCTION------------
+
+mysql> SELECT LENGTH(First_name) FROM EMPLOYEE;
++--------------------+
+| LENGTH(First_name) |
++--------------------+
+|                  4 |
+|                  7 |
+|                  3 |
+|                  3 |
+|                  5 |
+|                  6 |
+|                  9 |
+|                  9 |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT LENGTH(city) FROM SALES_DATA;
++--------------+
+| LENGTH(city) |
++--------------+
+|            4 |
+|            6 |
+|            5 |
+|            6 |
+|            4 |
+|            5 |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT First_name,LENGTH(First_name) AS Length FROM EMPLOYEE WHERE Employee_id>2;
++------------+--------+
+| First_name | Length |
++------------+--------+
+| Roy        |      3 |
+| Tom        |      3 |
+| Jerry      |      5 |
+| Philip     |      6 |
+| TestName1  |      9 |
+| TestName2  |      9 |
++------------+--------+
+6 rows in set (0.00 sec)
+
+                            -------------ROUND FUNCTION------------
+
+mysql> SELECT ROUND(price) FROM sales_data;
++--------------+
+| ROUND(price) |
++--------------+
+|        50000 |
+|        20000 |
+|        15000 |
+|        48000 |
+|        21000 |
+|        14000 |
++--------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT ROUND(price,1) FROM sales_data;
++----------------+
+| ROUND(price,1) |
++----------------+
+|        50000.0 |
+|        20000.0 |
+|        15000.0 |
+|        48000.0 |
+|        21000.0 |
+|        14000.0 |
++----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT ROUND(price,3) FROM sales_data;
++----------------+
+| ROUND(price,3) |
++----------------+
+|       50000.00 |
+|       20000.00 |
+|       15000.00 |
+|       48000.00 |
+|       21000.00 |
+|       14000.00 |
++----------------+
+6 rows in set (0.00 sec)
+
+                            -------------NOW FUNCTION------------
+
+mysql> SELECT NOW() AS Date_Time;
++---------------------+
+| Date_Time           |
++---------------------+
+| 2025-05-18 13:45:08 |
++---------------------+
+1 row in set (0.00 sec)
+
+1)
+INSERT INTO logs (user_id, login_time)
+VALUES (101, NOW());
+
+2)
+UPDATE users
+SET last_updated = NOW()
+WHERE id = 5;
+
+                            -------------FORMAT FUNCTION------------
+
+mysql> SELECT FORMAT(1234567.891,2);
++-----------------------+
+| FORMAT(1234567.891,2) |
++-----------------------+
+| 1,234,567.89          |
++-----------------------+
+1 row in set (0.00 sec)
+							
