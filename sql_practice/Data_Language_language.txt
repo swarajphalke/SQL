@@ -83,6 +83,7 @@ mysql> select all age from hostel_students;
 +------+
 5 rows in set (0.00 sec)
 
+
 mysql> select distinct age from hostel_students;
 +------+
 | age  |
