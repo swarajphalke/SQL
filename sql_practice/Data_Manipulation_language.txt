@@ -1,0 +1,95 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| blockchainml       |
+| feedbackdb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| profound           |
+| profound_labmanual |
+| studnetdb          |
+| sys                |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use profound;
+Database changed
+mysql> CREATE TABLE Students (
+    ->     student_id INT PRIMARY KEY,
+    ->     name VARCHAR(100),
+    ->     age INT,
+    ->     course VARCHAR(50),
+    ->     email VARCHAR(50) UNIQUE
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO Students(student_id, name, age, course, email)
+    -> VALUES
+    -> (1,'Aditya',22,'Computer Science','adityavarnekar@gmail.com'),
+    -> (2,'Swaraj',22,'Computer Science','swaraj@gmail.com'),
+    -> (3,'Vinayk',22,'It','vinayk@gmail.com');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++--------------------+
+| Tables_in_profound |
++--------------------+
+| students           |
++--------------------+
+1 row in set (0.01 sec)
+
+mysql> desc students;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| student_id | int          | NO   | PRI | NULL    |       |
+| name       | varchar(100) | YES  |     | NULL    |       |
+| age        | int          | YES  |     | NULL    |       |
+| course     | varchar(50)  | YES  |     | NULL    |       |
+| email      | varchar(50)  | YES  | UNI | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from students;
++------------+--------+------+------------------+--------------------------+
+| student_id | name   | age  | course           | email                    |
++------------+--------+------+------------------+--------------------------+
+|          1 | Aditya |   22 | Computer Science | adityavarnekar@gmail.com |
+|          2 | Swaraj |   22 | Computer Science | swaraj@gmail.com         |
+|          3 | Vinayk |   22 | It               | vinayk@gmail.com         |
++------------+--------+------+------------------+--------------------------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE Students
+    -> SET course='Information Technology'
+    -> WHERE student_id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++------------+--------+------+------------------------+--------------------------+
+| student_id | name   | age  | course                 | email                    |
++------------+--------+------+------------------------+--------------------------+
+|          1 | Aditya |   22 | Computer Science       | adityavarnekar@gmail.com |
+|          2 | Swaraj |   22 | Computer Science       | swaraj@gmail.com         |
+|          3 | Vinayk |   22 | Information Technology | vinayk@gmail.com         |
++------------+--------+------+------------------------+--------------------------+
+3 rows in set (0.00 sec)
+
+
+mysql> DELETE from Students WHERE student_id=3;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++------------+--------+------+------------------+--------------------------+
+| student_id | name   | age  | course           | email                    |
++------------+--------+------+------------------+--------------------------+
+|          1 | Aditya |   22 | Computer Science | adityavarnekar@gmail.com |
+|          2 | Swaraj |   22 | Computer Science | swaraj@gmail.com         |
++------------+--------+------+------------------+--------------------------+
+2 rows in set (0.00 sec)
+
+mysql>
