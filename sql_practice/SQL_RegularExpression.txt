@@ -54,7 +54,6 @@ mysql> SELECT name FROM students WHERE name REGEXP 'a.';
 
 4.Matches names containing either w or r.
 
-
 mysql> SELECT name FROM students WHERE name REGEXP 'w|r';
 +--------+
 | name   |
