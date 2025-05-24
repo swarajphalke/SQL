@@ -31,7 +31,6 @@ mysql> SELECT name FROM students WHERE name REGEXP '^s';
 2.Matches names ending with a.
 
 mysql> SELECT name FROM students WHERE name REGEXP 'a$';
-
 +--------+
 | name   |
 +--------+
