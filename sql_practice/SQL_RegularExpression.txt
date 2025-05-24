@@ -40,7 +40,6 @@ mysql> SELECT name FROM students WHERE name REGEXP 'a$';
 | Meera  |
 +--------+
 
-
 3.Matches a followed by any character.
 
 mysql> SELECT name FROM students WHERE name REGEXP 'a.';
