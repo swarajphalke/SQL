@@ -74,3 +74,8 @@ A set of detailed `.txt` files covering theoretical concepts, categorized for cl
 1. Clone the repo:  
    ```bash
    git clone https://github.com/swarajphalke/SQL-Mastery.git
+   
+--
+
+## 🤝 Let's Connect
+If you find this repository useful or inspiring, feel free to ⭐️ the repo and connect with me on https://www.linkedin.com/in/swaraj-phalke-b5539b220/.
