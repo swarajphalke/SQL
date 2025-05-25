@@ -4,6 +4,7 @@ mysql> SELECT department, MAX(salary) Max_Salary
     -> FROM employees
     -> GROUP BY department
     -> ORDER BY Max_Salary ASC;
+    
 +------------+------------+
 | department | Max_Salary |
 +------------+------------+
