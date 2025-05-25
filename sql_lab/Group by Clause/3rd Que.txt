@@ -5,6 +5,7 @@ mysql> SELECT department, COUNT(*) Employees, SUM(salary) Total_Salary
     -> FROM employees
     -> GROUP BY department
     -> ORDER BY Total_Salary DESC;
+    
 +------------+-----------+--------------+
 | department | Employees | Total_Salary |
 +------------+-----------+--------------+
