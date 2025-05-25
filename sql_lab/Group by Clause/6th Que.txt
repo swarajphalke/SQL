@@ -10,6 +10,7 @@ mysql> SELECT
     ->     EXTRACT(MONTH FROM Joining_date)
     -> ORDER BY
     ->     Join_Year, Join_Month;
+    
 +-----------+------------+-----------------+
 | Join_Year | Join_Month | No_of_employees |
 +-----------+------------+-----------------+
