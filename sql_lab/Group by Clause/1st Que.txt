@@ -3,6 +3,7 @@
 mysql> SELECT department, SUM(salary) as Total_Salary
     -> FROM employees
     -> GROUP BY department;
+    
 +------------+--------------+
 | department | Total_Salary |
 +------------+--------------+
