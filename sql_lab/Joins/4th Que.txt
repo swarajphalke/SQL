@@ -6,6 +6,7 @@ mysql> SELECT e.first_name, i.incentive_amount
     -> LEFT JOIN incentives i
     -> ON e.employee_id = i.employee_ref_id
     -> WHERE i.incentive_amoun IS NOT NULL;
+    
 +------------+------------------+
 | first_name | incentive_amount |
 +------------+------------------+
