@@ -5,6 +5,7 @@ mysql> SELECT e.first_name, i.incentive_amount
     -> FROM employees AS e
     -> INNER JOIN incentives AS i
     -> ON e.employee_id = i.employee_ref_id;
+    
 +------------+------------------+
 | first_name | incentive_amount |
 +------------+------------------+
